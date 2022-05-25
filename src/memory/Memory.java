@@ -1,22 +1,13 @@
 package memory;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
-
 public class Memory {
-    private ArrayList<memory.Page> ramki = new ArrayList<>();
     private int iloscRamek;
-    private int iloscStron;
-    private int mode;
-    private Proces[] procesy = new Proces[(int) Math.pow(10, 5)];
+    private Proces[] procesy = new Proces[1000];
 
-    public Memory(int iloscRamek, int iloscStron, int mode) {
+    public Memory(int iloscRamek, int mode) {
         this.iloscRamek = iloscRamek;
-        this.iloscStron = iloscStron;
-        Random random = new Random();
         for (int i = 0; i < procesy.length; i++) {
-            procesy[i] = new Proces(random.nextInt(2, 100), mode);
+            procesy[i] = new Proces(mode);
         }
     }
 
@@ -39,7 +30,7 @@ public class Memory {
         int iloscBrakowStron = 0;
         int sumWielkosci = 0;
         for (Proces proces : procesy) {
-            sumWielkosci += proces.getDlugoscCiagu();
+            sumWielkosci += proces.getIloscStron();
         }
         for(Proces proces : procesy) {
             proces.addIloscRamek(1);

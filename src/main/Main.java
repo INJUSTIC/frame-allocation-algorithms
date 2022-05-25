@@ -22,13 +22,11 @@ public class Main {
             int mode = sc.nextInt();
             return mode;
         };
-        System.out.print("Ilość stron: ");
-        int iloscStron = sc.nextInt();
         System.out.print("Ilość ramek: ");
         int iloscRamek = sc.nextInt();
         System.out.println("ciąg mode: ");
         int mode = changeTypCiagu.get();
-        memory = new Memory(iloscStron, iloscRamek, mode);
+        memory = new Memory(iloscRamek, mode);
         wykonajAlgorytmy();
         System.out.println("Czy chcesz kontynuować?\n1.Tak\n2.Nie");
         int opcja = sc.nextInt();

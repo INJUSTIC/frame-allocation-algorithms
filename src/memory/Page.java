@@ -13,6 +13,6 @@ public class Page {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Page page = (Page) o;
-        return typStrony == page.typStrony;
+        return this.typStrony == page.typStrony;
     }
 }

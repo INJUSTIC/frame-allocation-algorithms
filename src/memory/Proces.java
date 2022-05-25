@@ -1,26 +1,28 @@
 package memory;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
 
 public class Proces {
     private Page[] ciagOdwProc;
     private ArrayList<Page> ramki = new ArrayList<>();
-    private int dlugoscCiagu;
     private int iloscRamek = 0;
     private int iloscStron;
     private int mode;
 
-    public Proces(int length, int mode, int iloscStron) {
-        dlugoscCiagu = length;
-        ciagOdwProc = new Page[length];
+    public Proces(int mode) {
+        Random random = new Random();
+        ciagOdwProc = new Page[random.nextInt(2, 50)];
         this.mode = mode;
-        this.iloscStron = iloscStron;
+        iloscStron = random.nextInt(2,15); //= rozmiar procesu
         generujCiag(mode);
     }
     public int getDlugoscCiagu() {
-        return dlugoscCiagu;
+        return ciagOdwProc.length;
+    }
+
+    public int getIloscStron() {
+        return iloscStron;
     }
 
     public void addIloscRamek(int ilosc) {
@@ -28,8 +30,9 @@ public class Proces {
     }
 
     public int startLRU(int mode) {
+        int wolneRamki = iloscRamek;
         if (mode == 2) {
-            iloscRamek = uniquePagesSize(10, 0);
+            iloscRamek = Math.max(wolneRamki, uniquePagesSize(10, 0));
         }
         int iloscBrakowStron = 0;
         for (int currPageIndex = 0; currPageIndex < ciagOdwProc.length; currPageIndex++) {
@@ -64,20 +67,21 @@ public class Proces {
     }
 
     private int uniquePagesSize(int interv, int startIndex) {
-        HashSet<Page> uniquePages = new HashSet<>();
+        ArrayList<Page> uniquePages = new ArrayList<>();
+        //hashset nie działa
         for (int i = startIndex; i < startIndex + interv && i < ciagOdwProc.length; i++) {
-            uniquePages.add(ciagOdwProc[i]);
+            if (!uniquePages.contains(ciagOdwProc[i])) uniquePages.add(ciagOdwProc[i]);
         }
         return uniquePages.size();
     }
 
-    private void generujCiag(int c) {
+    private void generujCiag(int mode) {
         int length = ciagOdwProc.length;
-        switch (c) {
+        switch (mode) {
             case 0: {
                 //random
                 for (int i = 0; i < length; i++) {
-                    ciagOdwProc[i] = new Page(new Random().nextInt(1, + 1));
+                    ciagOdwProc[i] = new Page(new Random().nextInt(1, iloscStron + 1));
                 }
                 break;
             }
