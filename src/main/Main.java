@@ -1,7 +1,6 @@
 package main;
 
 import memory.Memory;
-
 import java.util.Scanner;
 import java.util.function.Supplier;
 
@@ -38,6 +37,6 @@ public class Main {
         System.out.println("przydizal proporcjonalny: " + memory.przydzialProporc());
         //System.out.println("Sterowanie częstością błędów strony: " + memory.startLRU());
         //System.out.println("ALRU: " + memory.startALRU());
-        System.out.println("Model strefowy: " + memory.przydzialStrefowy());
+        System.out.println("Model strefowy: " + memory.przydzialStrefowy(15));
     }
 }
